@@ -68,7 +68,10 @@
         <div class="card mb-5 mb-xl-10">
             <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_modal_form_password" aria-expanded="true" aria-controls="kt_account_modal_form_password">
                 <div class="card-title m-0">
-                    <h3 class="fw-bolder m-0">Reset Password</h3>
+                    <h3 class="card-title align-items-start flex-column">
+                        <span class="card-label fw-bolder fs-3 mb-1">Reset Password</span>
+                        <span class="text-muted mt-1 fw-bold fs-7">Resert password user</span>
+                    </h3>
                 </div>
             </div>
             <div id="kt_account_modal_form_password" class="collapse show">

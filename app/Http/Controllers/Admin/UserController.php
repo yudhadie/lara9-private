@@ -96,6 +96,7 @@ class UserController extends Controller
 
         return view('admin.setting.user.profile',[
             'title' => 'Profile',
+            'subtitle' => 'Detail Profile',
             'breadcrumbs' => Breadcrumbs::render('profile'),
             'user' => $user,
         ]);
