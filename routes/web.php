@@ -38,8 +38,10 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
         //Image
         Route::get('/image', [ImageController::class, 'index'])->name('image.index');
         Route::put('/image', [ImageController::class, 'update'])->name('image.update');
-        Route::put('/image-deletepub', [ImageController::class, 'deletepublic'])->name('image.deletepub');
-        Route::put('/image-deletepri', [ImageController::class, 'deleteprivate'])->name('image.deletepri');
+        Route::put('/image-delete-public', [ImageController::class, 'deletepublic'])->name('image.delete-public');
+        Route::put('/image-delete-private', [ImageController::class, 'deleteprivate'])->name('image.delete-private');
+        Route::put('/image-delete-name', [ImageController::class, 'deletename'])->name('image.delete-name');
+        Route::put('/image-delete-compress', [ImageController::class, 'deletecompress'])->name('image.delete-compress');
 
         //Setting
             //User

@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('public')->nullable();
             $table->string('private')->nullable();
+            $table->string('filename')->nullable();
+            $table->string('compress')->nullable();
             $table->timestamps();
         });
     }

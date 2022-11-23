@@ -24,7 +24,7 @@
                                     <input type="file" name="public" class="form-control form-control-lg form-control-solid mt-3" value="{{ $image->public }}" />
                                 @else
                                     <img class="mw-100 mh-300px card-rounded-bottom" style="object-fit: cover" alt="image" src="{{ asset($image->public) }}"/>
-                                    <button href="{{ route('image.deletepub') }}" id="delete" class="btn btn-danger my-2">Delete</button>
+                                    <button href="{{ route('image.delete-public') }}" id="delete" class="btn btn-danger my-2">Delete</button>
                                 @endif
                             </div>
                             <div class="col-lg-6 d-flex flex-column fv-row mb-8">
@@ -36,7 +36,33 @@
                                     <input type="file" name="private" class="form-control form-control-lg form-control-solid mt-3" value="{{ $image->private }}" />
                                 @else
                                     <img class="mw-100 mh-300px card-rounded-bottom" alt="image" src="{{ asset($image->private) }}"/>
-                                    <button href="{{ route('image.deletepri') }}" id="delete" class="btn btn-danger my-2">Delete</button>
+                                    <button href="{{ route('image.delete-private') }}" id="delete" class="btn btn-danger my-2">Delete</button>
+                                @endif
+                            </div>
+                            <div class="col-lg-6 d-flex flex-column fv-row mb-8">
+                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                    <span>File Name</span>
+                                </label>
+                                @if ( $image->filename == null )
+                                    <img class="mw-100 mh-300px card-rounded-bottom" style="object-fit: cover" alt="no-image" src="{{ asset('assets/media/no-image.jpg') }}"/>
+                                    <input type="file" name="filename" class="form-control form-control-lg form-control-solid mt-3" value="{{ $image->filename }}" />
+                                @else
+                                    <img class="mw-100 mh-300px card-rounded-bottom" alt="image" src="{{ asset($image->filename) }}"/>
+                                    <input type="file" name="filename" class="form-control form-control-lg form-control-solid mt-3" value="{{ $image->filename }}" />
+                                    <button href="{{ route('image.delete-name') }}" id="delete" class="btn btn-danger my-2">Delete</button>
+                                @endif
+                            </div>
+                            <div class="col-lg-6 d-flex flex-column fv-row mb-8">
+                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                    <span>Compress</span>
+                                </label>
+                                @if ( $image->compress == null )
+                                    <img class="mw-100 mh-300px card-rounded-bottom" style="object-fit: cover" alt="no-image" src="{{ asset('assets/media/no-image.jpg') }}"/>
+                                    <input type="file" name="compress" class="form-control form-control-lg form-control-solid mt-3" value="{{ $image->compress }}" />
+                                @else
+                                    <img class="mw-100 mh-300px card-rounded-bottom" alt="image" src="{{ asset($image->compress) }}"/>
+                                    <input type="file" name="compress" class="form-control form-control-lg form-control-solid mt-3" value="{{ $image->compress }}" />
+                                    <button href="{{ route('image.delete-compress') }}" id="delete" class="btn btn-danger my-2">Delete</button>
                                 @endif
                             </div>
                         </div>
@@ -67,7 +93,7 @@
 @push('scripts')
 
     <script>
-        var element = document.getElementById('menu_dashboard');
+        var element = document.getElementById('menu-image');
             element.classList.add('active');
     </script>
 

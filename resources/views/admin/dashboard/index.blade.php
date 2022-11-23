@@ -24,7 +24,7 @@
 @push('scripts')
 
     <script>
-        var element = document.getElementById('menu_dashboard');
+        var element = document.getElementById('menu-dashboard');
             element.classList.add('active');
     </script>
 
