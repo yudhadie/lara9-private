@@ -21,7 +21,7 @@
                                 </label>
                                 @if ( $image->public == null )
                                     <img class="mw-100 mh-300px card-rounded-bottom" style="object-fit: cover" alt="no-image" src="{{ asset('assets/media/no-image.jpg') }}"/>
-                                    <input type="file" name="public" class="form-control form-control-lg form-control-solid mt-3" value="{{ $image->public }}" />
+                                    <input type="file" accept=".jpg,.jpeg,.png" name="public" class="form-control form-control-lg form-control-solid mt-3" value="{{ $image->public }}" />
                                 @else
                                     <img class="mw-100 mh-300px card-rounded-bottom" style="object-fit: cover" alt="image" src="{{ asset($image->public) }}"/>
                                     <button href="{{ route('image.delete-public') }}" id="delete" class="btn btn-danger my-2">Delete</button>
@@ -33,7 +33,7 @@
                                 </label>
                                 @if ( $image->private == null )
                                     <img class="mw-100 mh-300px card-rounded-bottom" style="object-fit: cover" alt="no-image" src="{{ asset('assets/media/no-image.jpg') }}"/>
-                                    <input type="file" name="private" class="form-control form-control-lg form-control-solid mt-3" value="{{ $image->private }}" />
+                                    <input type="file" accept=".jpg,.jpeg,.png" name="private" class="form-control form-control-lg form-control-solid mt-3" value="{{ $image->private }}" />
                                 @else
                                     <img class="mw-100 mh-300px card-rounded-bottom" alt="image" src="{{ asset($image->private) }}"/>
                                     <button href="{{ route('image.delete-private') }}" id="delete" class="btn btn-danger my-2">Delete</button>
@@ -45,10 +45,10 @@
                                 </label>
                                 @if ( $image->filename == null )
                                     <img class="mw-100 mh-300px card-rounded-bottom" style="object-fit: cover" alt="no-image" src="{{ asset('assets/media/no-image.jpg') }}"/>
-                                    <input type="file" name="filename" class="form-control form-control-lg form-control-solid mt-3" value="{{ $image->filename }}" />
+                                    <input type="file" accept=".jpg,.jpeg,.png" name="filename" class="form-control form-control-lg form-control-solid mt-3" value="{{ $image->filename }}" />
                                 @else
                                     <img class="mw-100 mh-300px card-rounded-bottom" alt="image" src="{{ asset($image->filename) }}"/>
-                                    <input type="file" name="filename" class="form-control form-control-lg form-control-solid mt-3" value="{{ $image->filename }}" />
+                                    <input type="file" accept=".jpg,.jpeg,.png" name="filename" class="form-control form-control-lg form-control-solid mt-3" value="{{ $image->filename }}" />
                                     <button href="{{ route('image.delete-name') }}" id="delete" class="btn btn-danger my-2">Delete</button>
                                 @endif
                             </div>
@@ -58,11 +58,35 @@
                                 </label>
                                 @if ( $image->compress == null )
                                     <img class="mw-100 mh-300px card-rounded-bottom" style="object-fit: cover" alt="no-image" src="{{ asset('assets/media/no-image.jpg') }}"/>
-                                    <input type="file" name="compress" class="form-control form-control-lg form-control-solid mt-3" value="{{ $image->compress }}" />
+                                    <input type="file" accept=".jpg,.jpeg,.png" name="compress" class="form-control form-control-lg form-control-solid mt-3" value="{{ $image->compress }}" />
                                 @else
                                     <img class="mw-100 mh-300px card-rounded-bottom" alt="image" src="{{ asset($image->compress) }}"/>
-                                    <input type="file" name="compress" class="form-control form-control-lg form-control-solid mt-3" value="{{ $image->compress }}" />
+                                    <input type="file" accept=".jpg,.jpeg,.png" name="compress" class="form-control form-control-lg form-control-solid mt-3" value="{{ $image->compress }}" />
                                     <button href="{{ route('image.delete-compress') }}" id="delete" class="btn btn-danger my-2">Delete</button>
+                                @endif
+                            </div>
+                            <div class="col-lg-12 d-flex flex-column fv-row mb-8">
+                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                    <span>Multiple</span>
+                                </label>
+                                @if ( $files == null )
+                                    <img class="mw-100 mh-300px card-rounded-bottom" style="object-fit: cover" alt="no-image" src="{{ asset('assets/media/no-image.jpg') }}"/>
+                                    <input type="file" name="multiple[]" class="form-control form-control-lg form-control-solid mt-3" accept=".jpg,.jpeg,.png" multiple />
+                                @else
+                                    <div class="row g-10 row-cols-2 row-cols-lg-5">
+                                        @foreach ($files as $file)
+                                        <div class="col">
+                                            <a class="d-block overlay" data-fslightbox="lightbox-hot-sales" href="#">
+                                                <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded min-h-175px" style="background-image:url({{ asset($file) }})"></div>
+                                                <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
+                                                    <i class="bi bi-eye-fill fs-2x text-white"></i>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        @endforeach
+                                    </div>
+                                    <input type="file" name="multiple[]" class="form-control form-control-lg form-control-solid mt-3" accept=".jpg,.jpeg,.png" multiple />
+                                    <button href="{{ route('image.delete-dir') }}" id="delete" class="btn btn-danger my-2">Delete</button>
                                 @endif
                             </div>
                         </div>

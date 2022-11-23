@@ -42,6 +42,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
         Route::put('/image-delete-private', [ImageController::class, 'deleteprivate'])->name('image.delete-private');
         Route::put('/image-delete-name', [ImageController::class, 'deletename'])->name('image.delete-name');
         Route::put('/image-delete-compress', [ImageController::class, 'deletecompress'])->name('image.delete-compress');
+        Route::put('/image-delete-dir', [ImageController::class, 'deletedir'])->name('image.delete-dir');
 
         //Setting
             //User

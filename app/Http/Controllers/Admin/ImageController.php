@@ -7,6 +7,7 @@ use App\Models\Image as Images;
 use Intervention\Image\Facades\Image;
 use Diglactic\Breadcrumbs\Breadcrumbs;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class ImageController extends Controller
@@ -15,12 +16,16 @@ class ImageController extends Controller
     {
         $image = Images::find(1);
 
+        $files = Storage::files('uploads/1');
+
         return view('admin.image.index',[
             'title' => 'Image Test',
             'subtitle' => 'Test uploads gambar public dan private',
             'breadcrumbs' => Breadcrumbs::render('image'),
             'image' => $image,
+            'files' => $files,
         ]);
+
     }
 
     public function update(Request $request)
@@ -48,6 +53,12 @@ class ImageController extends Controller
             })->save($location);
             $compress = $location;
         }
+        if ($request->hasFile('multiple')) {
+            foreach ($request->file('multiple') as $multiple) {
+                $multiple->store('uploads/1');
+            }
+
+        }
 
         $image->update([
             'public' => $public,
@@ -73,7 +84,7 @@ class ImageController extends Controller
             'public' => null,
         ]);
 
-        return redirect()->route('image.index')->with('success', 'Data photo diupdate');
+        return redirect()->route('image.index')->with('error', 'Data photo berhasil dihapus');
     }
 
     public function deleteprivate()
@@ -89,7 +100,7 @@ class ImageController extends Controller
             'private' => null,
         ]);
 
-        return redirect()->route('image.index')->with('success', 'Data photo diupdate');
+        return redirect()->route('image.index')->with('error', 'Data photo berhasil dihapus');
     }
 
     public function deletename()
@@ -105,7 +116,7 @@ class ImageController extends Controller
             'filename' => null,
         ]);
 
-        return redirect()->route('image.index')->with('success', 'Data photo diupdate');
+        return redirect()->route('image.index')->with('error', 'Data photo berhasil dihapus');
     }
 
     public function deletecompress()
@@ -121,6 +132,14 @@ class ImageController extends Controller
             'compress' => null,
         ]);
 
-        return redirect()->route('image.index')->with('success', 'Data photo diupdate');
+        return redirect()->route('image.index')->with('error', 'Data photo berhasil dihapus');
     }
+
+    public function deletedir()
+    {
+        Storage::deleteDirectory('uploads/1');
+
+        return redirect()->route('image.index')->with('error', 'Data photo berhasil dihapus');
+    }
+
 }
