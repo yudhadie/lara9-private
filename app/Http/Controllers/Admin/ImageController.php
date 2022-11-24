@@ -54,10 +54,10 @@ class ImageController extends Controller
             $compress = $location;
         }
         if ($request->hasFile('multiple')) {
-            foreach ($request->file('multiple') as $multiple) {
-                $multiple->store('uploads/1');
+            foreach ($request->file('multiple') as $key => $multiple ) {
+                // $multiple->storeAs('uploads/'.$image->id, $key.'.jpg');
+                $multiple->store('uploads/'.$image->id);
             }
-
         }
 
         $image->update([
@@ -135,9 +135,18 @@ class ImageController extends Controller
         return redirect()->route('image.index')->with('error', 'Data photo berhasil dihapus');
     }
 
-    public function deletedir()
+    public function deletedir(Request $request)
     {
-        Storage::deleteDirectory('uploads/1');
+        $id = $request->imageid;
+        Storage::deleteDirectory('uploads/'.$id);
+
+        return redirect()->route('image.index')->with('error', 'Data photo berhasil dihapus');
+    }
+
+    public function deleteimage(Request $request,$id)
+    {
+        $imageid = $request->imageid;
+        Storage::delete('uploads/'.$imageid.'/'.$id);
 
         return redirect()->route('image.index')->with('error', 'Data photo berhasil dihapus');
     }

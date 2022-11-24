@@ -76,17 +76,19 @@
                                     <div class="row g-10 row-cols-2 row-cols-lg-5">
                                         @foreach ($files as $file)
                                         <div class="col">
-                                            <a class="d-block overlay" data-fslightbox="lightbox-hot-sales" href="#">
+                                            <a class="d-block overlay" data-fslightbox="lightbox-hot-sales" href="{{ asset($file) }}">
                                                 <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded min-h-175px" style="background-image:url({{ asset($file) }})"></div>
                                                 <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
                                                     <i class="bi bi-eye-fill fs-2x text-white"></i>
                                                 </div>
                                             </a>
+                                            <button href="{{ route('image.delete-photo',str_replace('uploads/'.$image->id.'/', '', $file)) }}" id="delete" class="btn btn-danger btn-sm my-2">Delete</button>
+                                            <p></p>
                                         </div>
                                         @endforeach
                                     </div>
                                     <input type="file" name="multiple[]" class="form-control form-control-lg form-control-solid mt-3" accept=".jpg,.jpeg,.png" multiple />
-                                    <button href="{{ route('image.delete-dir') }}" id="delete" class="btn btn-danger my-2">Delete</button>
+                                    <button href="{{ route('image.delete-dir') }}" id="delete" class="btn btn-danger my-2">Delete All</button>
                                 @endif
                             </div>
                         </div>
@@ -109,6 +111,7 @@
     <form action="" method="post" id="deleteForm">
         @csrf
         @method("put")
+        <input type="hidden" name="imageid" value="{{$image->id}}">
         <input type="submit" value="Hapus" class="btn btn-danger" style="display: none">
     </form>
 
@@ -120,7 +123,7 @@
         var element = document.getElementById('menu-image');
             element.classList.add('active');
     </script>
-
+    <script src="{{asset('assets/plugins/custom/fslightbox/fslightbox.bundle.js')}}"></script>
     <script>
         $('button#delete').on('click',function(e){
             e.preventDefault();
